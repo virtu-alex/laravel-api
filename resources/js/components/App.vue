@@ -1,12 +1,25 @@
-<template lang="">
+<template>
     <div class="content">
-        <div class="title m-b-md">Work in progress</div>
+        <AppHeader :title="title" />
+        <main class="container mt-3">Lista Post
+            <PostsList />
+        </main>
     </div>
 </template>
 <script>
-
+import AppHeader from "./AppHeader.vue";
+import PostsList from "./posts/PostsList.vue";
 export default {
     name: "App",
+    components: {
+        AppHeader,
+        PostsList,
+    },
+    data() {
+        return {
+            title: "Boolpress",
+        };
+    },
 };
 </script>
 <style lang=""></style>
