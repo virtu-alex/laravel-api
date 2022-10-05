@@ -4,15 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
- require('./bootstrap');
+require('./bootstrap');
 
- window.Vue = require('vue');
+window.Vue = require('vue');
 
- window.axios = require('axios');
- 
- import App from './components/App.vue'
- 
- const root = new Vue({
-     el: '#root',
-     render: h => h(App)
- })
+window.axios = require('axios');
+
+import App from './components/App.vue'
+//  Router import
+import router from './router.js';
+const root = new Vue({
+    router,
+    el: '#root',
+    render: h => h(App)
+})
