@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,7 +15,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')
+            ->with('category', 'tags', 'user')
+            ->paginate(9);
+        //o uso get o uso paginate
+        // ->get();
+
+
         return response()->json($posts);
     }
 
