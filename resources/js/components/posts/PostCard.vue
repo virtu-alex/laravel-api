@@ -1,9 +1,19 @@
 <template>
     <div class="card bg-dark text-white mb-3">
-        <div class="card-body">
+        <div
+            class="card-header d-flex justify-content-between align-items-center"
+        >
             <h5 class="card-title">
                 {{ post.title }}
             </h5>
+
+            <router-link
+                :to="{ name: 'post-detail', params: { slug: post.slug } }"
+                class="btn btn-primary btn-sm p-3"
+                ><i class="fa-solid fa-eye mr-2"></i> Vedi</router-link
+            >
+        </div>
+        <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">
                 Pubblicato il: {{ publishedAt }}
             </h6>
@@ -15,7 +25,9 @@
             >
                 <span
                     class="badge badge-pill"
-                    :class="`badge-${post.category ? post.category.color : 'light'}`"
+                    :class="`badge-${
+                        post.category ? post.category.color : 'light'
+                    }`"
                 >
                     {{ post.category ? post.category.label : "nessuna" }}</span
                 >
