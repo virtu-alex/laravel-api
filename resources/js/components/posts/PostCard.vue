@@ -10,6 +10,27 @@
             <p>
                 {{ post.content }}
             </p>
+            <div
+                class="card-footer d-flex justify-content-between align-items-center"
+            >
+                <span
+                    class="badge badge-pill"
+                    :class="`badge-${post.category ? post.category.color : 'light'}`"
+                >
+                    {{ post.category ? post.category.label : "nessuna" }}</span
+                >
+
+                <div>
+                    <span
+                        v-for="tag in post.tags"
+                        :key="tag.id"
+                        class="badge mr-1 text-white"
+                        :style="`background-color:${tag.color}`"
+                    >
+                        {{ tag.label }}
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -27,8 +48,7 @@ export default {
             const year = postDate.getFullYear();
             if (day < 10) day = "0" + day;
             if (month < 10) month = "0" + month;
-            return `${day}/${month}/${year}`
-
+            return `${day}/${month}/${year}`;
         },
     },
 };
