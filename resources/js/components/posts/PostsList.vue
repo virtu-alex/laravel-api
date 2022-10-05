@@ -18,11 +18,17 @@
             </div>
             <h5 v-else>Non ci sono posts</h5>
         </div>
+        <AppPagination
+            @change-page="fetchPosts"
+            :lastPage="pagination.last"
+            :currentPage="pagination.current"
+        />
     </section>
 </template>
 
 <script>
 import PostCard from "./PostCard.vue";
+import AppPagination from "../AppPagination.vue";
 import AppLoader from "../AppLoader.vue";
 export default {
     name: "PostsList",
@@ -31,16 +37,23 @@ export default {
             posts: [],
             error: null,
             isLoading: false,
+            pagination: {
+                current: null,
+                last: null,
+            },
         };
     },
-    components: { PostCard, AppLoader },
+    components: { PostCard, AppLoader, AppPagination },
     methods: {
-        fetchPosts() {
+        fetchPosts(page = 1) {
             this.isLoading = true;
             axios
-                .get("http://localhost:8000/api/posts")
+                .get(`http://localhost:8000/api/posts?page=${page}`)
                 .then((res) => {
-                    this.posts = res.data;
+                    const { data, current_page, last_page } = res.data;
+                    this.posts = data;
+                    this.pagination.current = current_page;
+                    this.pagination.last = last_page;
                 })
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei post";
@@ -55,6 +68,4 @@ export default {
     },
 };
 </script>
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
