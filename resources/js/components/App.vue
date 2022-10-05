@@ -1,19 +1,18 @@
 <template>
     <div class="content">
         <AppHeader :title="title" />
-        <main class="container mt-3">Lista Post
-            <PostsList />
+        <main class="container mt-3">
+            <router-view></router-view>
         </main>
     </div>
 </template>
 <script>
 import AppHeader from "./AppHeader.vue";
-import PostsList from "./posts/PostsList.vue";
+
 export default {
     name: "App",
     components: {
         AppHeader,
-        PostsList,
     },
     data() {
         return {
